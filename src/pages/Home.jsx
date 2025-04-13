@@ -1,4 +1,7 @@
 import ProductCard from "../components/ProductCard"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import ProductCard from "../components/ProductCard"
 
 const mockProducts = [
   {
@@ -27,5 +30,33 @@ const Home = () => {
   )
 }
 
-export default Home
 
+const Home = () => {
+  const [products, setProducts] = useState([])
+
+  const fetchProducts = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/products`)
+      setProducts(res.data)
+    } catch (error) {
+      console.error("Ошибка загрузки товаров:", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mb-6">Каталог нижнего белья</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export default Home
