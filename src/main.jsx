@@ -12,3 +12,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 )
 
+import { AuthProvider } from "./context/AuthContext"
+
+// ...
+<AuthProvider>
+  <CartProvider>
+    <App />
+  </CartProvider>
+</AuthProvider>
