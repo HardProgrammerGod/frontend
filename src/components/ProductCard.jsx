@@ -26,3 +26,21 @@ const ProductCard = ({ product }) => {
 }
 
 export default ProductCard
+
+
+const ProductCard = ({ product }) => {
+  return (
+    <Link to={`/product/${product._id}`} className="block border rounded-2xl shadow hover:shadow-lg p-4 transition-all">
+      <img
+        src={product.image || "/default.jpg"}
+        alt={product.title}
+        className="w-full h-48 object-cover rounded-lg mb-4"
+      />
+      <h3 className="text-lg font-semibold mb-1">{product.title}</h3>
+      <p className="text-sm text-gray-500 mb-2 truncate">{product.description}</p>
+      <p className="text-pink-600 font-bold">{product.price}₽</p>
+    </Link>
+  )
+}
+
+export default ProductCard
